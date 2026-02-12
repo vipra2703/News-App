@@ -1,25 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import './App.css';
+import Navbar from './components/Navbar';
+// render compiles jsx into html and then renders html
+import React, { Component } from 'react'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import LoadingBar from "react-top-loading-bar";
+import News from './components/News';
+
+
+export default class App extends Component {
+  pageSize=15
+  state={
+    progress:0
+  }
+  setProgress=(progress)=>{
+    this.setState({progress:progress})
+  }
+  render() {
+    return (
+      <div>
+        <BrowserRouter>
+          <Navbar/>
+          <LoadingBar
+        color="#f11946"
+        progress={this.state.progress}
+      />
+          <Routes>
+  {/* Wrap each component in the element prop and add a unique key */}
+            <Route path='/' element={<News setProgress={this.setProgress} key="general" pagesize={this.pageSize} country="us" category="general"/>} />
+            <Route path='/business' element={<News setProgress={this.setProgress} key="business" pagesize={this.pageSize} country="us" category="business"/>} />
+            <Route path='/entertainment' element={<News setProgress={this.setProgress} key="entertainment" pagesize={this.pageSize} country="us" category="entertainment"/>} />
+            <Route path='/health' element={<News setProgress={this.setProgress} key="health" pagesize={this.pageSize} country="us" category="health"/>} />
+            <Route path='/science' element={<News setProgress={this.setProgress} key="science" pagesize={this.pageSize} country="us" category="science"/>} />
+            <Route path='/sports' element={<News setProgress={this.setProgress} key="sports" pagesize={this.pageSize} country="us" category="sports"/>} />
+            <Route path='/technology' element={<News setProgress={this.setProgress} key="technology" pagesize={this.pageSize} country="us" category="technology"/>} />
+          </Routes>
+        </BrowserRouter>
+      </div>
+    )
+  }
 }
 
-export default App;
