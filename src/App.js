@@ -4,7 +4,6 @@ import Navbar from './components/Navbar';
 // render compiles jsx into html and then renders html
 import React, { Component } from 'react'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import LoadingBar from "react-top-loading-bar";
 import News from './components/News';
 
 
@@ -21,10 +20,6 @@ export default class App extends Component {
       <div>
         <BrowserRouter>
           <Navbar/>
-          <LoadingBar
-        color="#f11946"
-        progress={this.state.progress}
-      />
           <Routes>
   {/* Wrap each component in the element prop and add a unique key */}
             <Route path='/' element={<News setProgress={this.setProgress} key="general" pagesize={this.pageSize} country="us" category="general"/>} />
